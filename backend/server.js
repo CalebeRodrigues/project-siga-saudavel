@@ -5,6 +5,8 @@ const cors = require("cors");
 const helmet = require("helmet");
 const path = require("path");
 
+const { middleWareGlobal } = require("./src/middlewares/middleware");
+
 const routes = require("./routes");
 
 
@@ -22,7 +24,7 @@ app.use(express.urlencoded( {extended: true} ));
 app.use(express.json());
 app.use(express.static(path.resolve(__dirname, 'public')));
 
-// app.use(middlewareGlobal);
+app.use(middleWareGlobal);
 
 app.use(routes);
 
