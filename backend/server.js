@@ -26,13 +26,13 @@ app.use(express.static(path.resolve(__dirname, 'public')));
 
 app.use(routes);
 
-// const database = require('./db');
+const database = require('./db');
 
-// database.sync().then(() => {
-    // app.emit('online');
-// }).catch(e => console.log(e));
+database.sync().then(() => {
+    app.emit('online');
+}).catch(e => console.log(e));
 
-// app.on('online', () => {
+app.on('online', () => {
     app.listen(8080, () => {
         console.log('\n');
         console.log('Servidor online!');
@@ -40,4 +40,4 @@ app.use(routes);
         console.log('Servidor ativo na porta: [8080]!');
         console.log('\n');
     })
-// });
+});
