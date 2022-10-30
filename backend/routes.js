@@ -18,6 +18,7 @@ route.put('/user/update/:id', UserController.update);
 
 route.delete('/user/delete/:id', UserController.deleteById);
 
+// Categorias
 
 
 module.exports = route;
