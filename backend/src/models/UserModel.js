@@ -124,6 +124,10 @@ class User {
 
         await user.destroy();
     }
+
+    static get Model() {
+        return UserModel;
+    }
 }
 
 module.exports.User = User;

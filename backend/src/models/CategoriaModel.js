@@ -85,6 +85,10 @@ class Categoria {
 
         return all;
     }
+
+    static get Model() {
+        return CategoriaModel;
+    }
 }
 
 module.exports.Categoria = Categoria;

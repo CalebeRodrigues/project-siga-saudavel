@@ -4,6 +4,7 @@ const route = express.Router();
 
 const UserController = require("./src/controllers/UserController");
 const CategoriaController = require("./src/controllers/CategoriaController");
+const PostController = require("./src/controllers/PostController");
 
 route.get('/', (req, res) => {
     res.send("Siga Saudavel - API");
@@ -18,6 +19,11 @@ route.post('/user/register', UserController.register);
 route.put('/user/update/:id', UserController.update);
 
 route.delete('/user/delete/:id', UserController.deleteById);
+
+// Publications
+
+route.post('/pub/create', PostController.create);
+
 
 // Categorias
 route.get('/categoria/all', CategoriaController.findAll);
