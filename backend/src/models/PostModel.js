@@ -73,7 +73,35 @@ class Post {
     }
 
     // Static methods
-    
+    static async findById(ID) {
+        const post = await PostModel.findOne({ where: { ID }});
+
+        if (!post) throw new Error("Não existe nenhuma publicação atrelada a este ID");
+
+        return post;
+    }
+
+    static async findByUser(IDUser) {
+        const post = await PostModel.findAll({ where: { IDUser }});
+
+        if (post.length == 0) {
+            const user = await User.Model.findOne({ where: { ID: IDUser } });
+
+            if(user) throw new Error("Ainda não existem publicações feitas por este usuario.");
+
+            throw new Error("Não existe um usuario atrelado a este ID;");
+        }
+
+        return post;
+    }
+
+    static async findAll() {
+        const posts = await PostModel.findAll();
+
+        if(posts.length == 0) throw new Error("Ainda não existem publicações na plataforma.");
+
+        return posts;
+    }
 }
 
 exports.Post = Post;
