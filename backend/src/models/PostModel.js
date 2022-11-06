@@ -1,5 +1,6 @@
 const { Sequelize } = require("sequelize");
 const database = require("../../db");
+const { Categoria } = require("./CategoriaModel");
 const { User } = require("./UserModel");
 
 const PostModel = database.define('post', {
@@ -101,6 +102,10 @@ class Post {
         if(posts.length == 0) throw new Error("Ainda não existem publicações na plataforma.");
 
         return posts;
+    }
+
+    static get Model() {
+        return PostModel;
     }
 }
 
