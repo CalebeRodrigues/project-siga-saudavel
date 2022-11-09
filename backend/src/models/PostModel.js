@@ -3,6 +3,8 @@ const database = require("../../db");
 const { Categoria } = require("./CategoriaModel");
 const { User } = require("./UserModel");
 
+const { PostCateg } = require("./PostCateg");
+
 const PostModel = database.define('post', {
     ID: {
         primaryKey: true,
@@ -31,6 +33,12 @@ const PostModel = database.define('post', {
 PostModel.belongsTo(User.Model, {
     constraints: true,
     foreignKey: 'IDUser',
+});
+
+PostModel.hasMany(PostCateg, {
+    constraints: true,
+    foreignKey: 'IDCateg',
+    foreignKeyConstraint: 'IDPost'
 });
 
 class Post {
