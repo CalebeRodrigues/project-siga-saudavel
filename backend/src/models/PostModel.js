@@ -58,8 +58,35 @@ class Post {
 
         try {
             this.post = await PostModel.create(this.body);
+
+            const id = this.post['ID'];
+
+            const categs = this.body['IDCateg'].split("%@");
+
+            for(let value of categs) {
+                if(value.length == 0) break;
+
+                let categ = await Categoria.findById(value);
+
+                if (!categ) throw new Error("Favor inserir pelo menos uma categoria valida para a publicação.");
+
+                await PostCateg.create({
+                    IDPost: id,
+                    IDCateg: categ['ID']
+                });
+            }
         }
         catch(e) {
+            if(this.post) {
+                PostCateg.destroy({
+                    where: {
+                        IDPost: this.post['ID']
+                    }
+                });
+
+                this.post.destroy();
+            }
+            // throw new Error(e.message);
             throw new Error("Ocorreu um erro inesperado ao realizar a publicação.");
         } 
     }
@@ -78,6 +105,7 @@ class Post {
             imagem: this.body.imagem,
             conteudo: this.body.conteudo,
             IDUser: Number(idUser),
+            IDCateg: this.body.IDCateg
         };
     }
 
