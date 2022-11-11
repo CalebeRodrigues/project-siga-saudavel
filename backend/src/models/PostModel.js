@@ -3,7 +3,7 @@ const database = require("../../db");
 const { Categoria } = require("./CategoriaModel");
 const { User } = require("./UserModel");
 
-const { PostCateg } = require("./PostCateg");
+const { PostCateg, PostCategClass } = require("./PostCateg");
 
 const PostModel = database.define('post', {
     ID: {
@@ -37,7 +37,7 @@ PostModel.belongsTo(User.Model, {
 
 PostModel.hasMany(PostCateg, {
     constraints: true,
-    foreignKey: 'IDCateg',
+    foreignKey: 'IDPost',
     foreignKeyConstraint: 'IDPost'
 });
 
@@ -111,12 +111,28 @@ class Post {
 
     // Static methods
     static async findById(ID) {
-        const post = await PostModel.findOne({ where: { ID }});
+        const post = await PostModel.findOne({ where: { ID }, include: [PostCateg] });
+        
+        const post_categs = post['post_categs'];
+        const categs = [];
+
+        for(let value of post_categs) {
+            const temp = await Categoria.findById(value['IDCateg']);
+            categs.push({ nome: temp.nome});
+        }
+
+        console.log("----------------------------------------------------\n");
+        console.log(`Categoria: ${categs}`)
+        console.log("\n----------------------------------------------------");
+
 
         if (!post) throw new Error("Não existe nenhuma publicação atrelada a este ID");
 
-        return post;
+        const obj = this.estruturaObj(post, categs);
+
+        return obj;
     }
+
 
     static async findByUser(IDUser) {
         const post = await PostModel.findAll({ where: { IDUser }});
@@ -142,6 +158,16 @@ class Post {
 
     static get Model() {
         return PostModel;
+    }
+
+    static estruturaObj({titulo, ingredientes, imagem, conteudo, IDUser, createdAt, updatedAt}, categorias) {
+        const obj = {
+            titulo, ingredientes, imagem,
+            conteudo, IDUser, createdAt, updatedAt,
+            categorias
+        };
+
+        return obj;
     }
 }
 
