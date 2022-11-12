@@ -3,7 +3,7 @@ const database = require("../../db");
 const { Categoria } = require("./CategoriaModel");
 const { User } = require("./UserModel");
 
-const { PostCateg, PostCategClass } = require("./PostCateg");
+const { PostCateg } = require("./PostCateg");
 
 const PostModel = database.define('post', {
     ID: {
@@ -118,12 +118,8 @@ class Post {
 
         for(let value of post_categs) {
             const temp = await Categoria.findById(value['IDCateg']);
-            categs.push({ nome: temp.nome});
+            categs.push({ ID: temp.ID , nome: temp.nome});
         }
-
-        console.log("----------------------------------------------------\n");
-        console.log(`Categoria: ${categs}`)
-        console.log("\n----------------------------------------------------");
 
 
         if (!post) throw new Error("Não existe nenhuma publicação atrelada a este ID");
@@ -135,7 +131,7 @@ class Post {
 
 
     static async findByUser(IDUser) {
-        const post = await PostModel.findAll({ where: { IDUser }});
+        const post = await PostModel.findAll({ where: { IDUser }, include: [PostCateg]});
 
         if (post.length == 0) {
             const user = await User.Model.findOne({ where: { ID: IDUser } });
@@ -145,15 +141,49 @@ class Post {
             throw new Error("Não existe um usuario atrelado a este ID;");
         }
 
-        return post;
+        const result = [];
+        
+
+        for (let objPai of post) {
+            const post_categs = objPai['post_categs'];
+    
+            const categs = [];
+    
+            for(let value of post_categs) {
+                const temp = await Categoria.findById(value['IDCateg']);
+                categs.push({ ID: temp.ID , nome: temp.nome});
+            }
+    
+            const obj = this.estruturaObj(objPai, categs);
+            result.push(obj);
+        }
+
+        return result;
     }
 
     static async findAll() {
-        const posts = await PostModel.findAll();
+        const posts = await PostModel.findAll({ include: [PostCateg] });
 
         if(posts.length == 0) throw new Error("Ainda não existem publicações na plataforma.");
 
-        return posts;
+        const result = [];
+        
+
+        for (let objPai of posts) {
+            const post_categs = objPai['post_categs'];
+    
+            const categs = [];
+    
+            for(let value of post_categs) {
+                const temp = await Categoria.findById(value['IDCateg']);
+                categs.push({ ID: temp.ID , nome: temp.nome});
+            }
+    
+            const obj = this.estruturaObj(objPai, categs);
+            result.push(obj);
+        }
+
+        return result;
     }
 
     static get Model() {
