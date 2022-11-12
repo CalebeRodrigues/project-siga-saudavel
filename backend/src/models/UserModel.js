@@ -61,6 +61,24 @@ class User {
         this.user = await UserModel.create(this.body);
     }
 
+    async login() {
+        if (!this.valida()) {
+            throw new Error('Email inválido!');
+        }
+
+        this.user = await UserModel.findOne({
+            where: { 
+                email: this.body.email,
+            }
+        });
+
+        this.user = (this.user != null && !bcryptjs.compareSync(this.body.senha, this.user.senha)) ? null : this.user;
+        
+        if (this.user == null) {
+            throw new Error('Email ou senha incorretos!');
+        }
+    }
+
     async update(ID) {
         if(!this.valida()) throw new Error('E-mail inválido!');
 

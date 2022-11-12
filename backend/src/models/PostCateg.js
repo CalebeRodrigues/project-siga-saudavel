@@ -29,13 +29,4 @@ const PostCategModel = database.define('post_categ', {
 //     foreignKey: 'IDCateg'
 // });
 
-class PostCategClass {
-    static async findAll(IDPost) {
-        const all = await PostCategModel.findAll({ where: { IDPost } });
-
-        return all;
-    }
-}
-
 exports.PostCateg = PostCategModel;
-exports.PostCategClass = PostCategClass;

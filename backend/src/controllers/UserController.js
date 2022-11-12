@@ -13,6 +13,20 @@ module.exports.register = async (req, res) => {
     }
 };
 
+exports.login = async (req, res) => {
+    try {        
+        const server = new User(req.body);
+
+        await server.login();
+
+        
+        res.status(200).send(server.user);
+    }
+    catch(e) {
+        res.status(400).send(e.message);
+    }
+};
+
 module.exports.update = async (req, res) => {
     const user = new User(req.body);
 

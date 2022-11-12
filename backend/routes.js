@@ -11,6 +11,7 @@ route.get('/', (req, res) => {
 });
 
 // User
+route.get('/user/login', UserController.login);
 route.get('/user/all', UserController.findAll);
 route.get('/user/:id', UserController.findById);
 
