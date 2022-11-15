@@ -1,4 +1,4 @@
-const { Sequelize } = require("sequelize");
+const { Sequelize, STRING } = require("sequelize");
 const database = require("../../db");
 const { Categoria } = require("./CategoriaModel");
 const { User } = require("./UserModel");
@@ -25,6 +25,10 @@ const PostModel = database.define('post', {
         allowNull: false,
     },
     conteudo: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+    descricao: {
         type: Sequelize.STRING,
         allowNull: false,
     }
@@ -104,6 +108,7 @@ class Post {
             ingredientes: this.body.ingredientes,
             imagem: this.body.imagem,
             conteudo: this.body.conteudo,
+            descricao: this.body.descricao,
             IDUser: Number(idUser),
             IDCateg: this.body.IDCateg
         };
@@ -190,10 +195,10 @@ class Post {
         return PostModel;
     }
 
-    static estruturaObj({ID, titulo, ingredientes, imagem, conteudo, IDUser, createdAt, updatedAt}, categorias) {
+    static estruturaObj({ID, titulo, ingredientes, imagem, conteudo, descricao, IDUser, createdAt, updatedAt}, categorias) {
         const obj = {
             ID, titulo, ingredientes, imagem,
-            conteudo, IDUser, createdAt, updatedAt,
+            conteudo, descricao, IDUser, createdAt, updatedAt,
             categorias
         };
 
