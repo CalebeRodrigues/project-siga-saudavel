@@ -1,14 +1,20 @@
+import { Link, useNavigate } from 'react-router-dom';
 import '../../assets/css/global.css';
 
 import { useAuth } from '../../context/Auth/useAuth';
 
 export const Navbar = () => {
-
+  const navigate = useNavigate();
   const auth = useAuth();
+
+  const handleClickLogout = () => {
+    auth.logout();
+    navigate('/login');
+  }
 
   return (
     <header className="header">
-      <a href="/" className="logo-text">Rota Saudável</a>
+      <a href="/" className="logo-text">Siga Saudável</a>
 
       <button style={{display: 'none'}} className="header__btnMenu"> <i className="fas fa-bars fa-2x"></i> <span className="sr-only">Menu</span></button>
 
@@ -19,9 +25,12 @@ export const Navbar = () => {
 
           {
             auth.token ?
-              <li><a href="../Formulario_Login-main/Login.html" style={{backgroundColor:'#1db309', color:'#ffff'}}>Calebe</a></li>
+              <>
+                <li><a style={{ cursor: 'pointer' }} onClick={handleClickLogout}>Sair</a></li>
+                <li><Link to="/" style={{backgroundColor:'#1db309', color:'#ffff'}}>Olá, {auth.nick}</Link></li>
+              </>
             :
-              <li><a href="../Formulario_Login-main/Login.html" style={{backgroundColor:'#1db309', color:'#ffff'}}>Entrar</a></li>
+              <li><Link to="/login" style={{backgroundColor:'#1db309', color:'#ffff'}}>Entrar</Link></li>
 
           }
         </ul>

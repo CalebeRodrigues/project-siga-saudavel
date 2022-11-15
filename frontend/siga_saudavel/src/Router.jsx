@@ -7,6 +7,7 @@ import { AuthProvider } from './context/Auth/AuthProvider';
 
 import { Navbar } from './components/Navbar';
 import { Home } from './templates/Home';
+import { Login } from './templates/Login';
 
 export const Router = () => {
   return (
@@ -16,6 +17,8 @@ export const Router = () => {
 
         <Routes>
           <Route path='/' element={<Home />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/cadastro' element={<Login isLogin={false} />} />
         </Routes>
       </AuthProvider>
     </BrowserRouter>

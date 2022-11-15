@@ -12,7 +12,7 @@ export const Card = (obj) => {
 
         <div className="people-cards__content">
           <h2 className="people-cards__title">{titulo}</h2>
-          <p className="people-cards__ingrediente">Ingredientes: {ingredientes}</p>
+          {/* <p className="people-cards__ingrediente">Ingredientes: {ingredientes}</p> */}
           <p className="people-cards__text">{descricao}</p>
         </div>
       </article>

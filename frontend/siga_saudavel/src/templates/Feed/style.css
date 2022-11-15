@@ -3,7 +3,7 @@
 }
 
 .people-cards__card{
-
+  border: 1px solid #dbe1e7;
 }
 .people-cards__card:hover{
   outline: 5px solid #01ce23;
@@ -11,7 +11,7 @@
   scale: 1.03;
   cursor: pointer;
 
-  transition: 0.3s;
+  transition: 0.01s;
 }
 .people-cards__card:hover .people-cards__avatar img{
   transform: translateY(-50%);
@@ -43,7 +43,7 @@
 }
 .people-cards__text{
   color: #303030;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .people-cards__ingrediente{
