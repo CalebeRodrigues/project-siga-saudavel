@@ -14,7 +14,7 @@ export const Navbar = () => {
 
       <nav className="header__nav">
         <ul>
-          <li><a href="/feed">Postagens</a></li>
+          <li><a href="#feed">Postagens</a></li>
           <li><a href="#">Categorias</a></li>
 
           {

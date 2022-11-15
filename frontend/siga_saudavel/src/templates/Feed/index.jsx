@@ -1,7 +1,8 @@
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+
 import { Card } from '../../components/Card';
 import { Api } from '../../services/api';
+
 import './style.css';
 
 export const Feed = () => {
@@ -10,7 +11,6 @@ export const Feed = () => {
   useEffect(() => {
     const getPublications = async () => {
       await Api.get('/pub/all/').then(response => {
-        console.log(response.data)
         setPublication(response.data);
       }).catch(err => {
         setPublication(null);
@@ -21,7 +21,7 @@ export const Feed = () => {
   }, []);
 
   return (
-    <div className="container" style={{ minHeight: '30vh', marginBottom: '20px' }}>
+    <div id="feed" className="container" style={{ minHeight: '30vh', marginBottom: '20px' }}>
       <h2>Publicações</h2>
         {
           publications ?
