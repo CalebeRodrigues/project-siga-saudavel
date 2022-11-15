@@ -9,7 +9,7 @@ export const AuthProvider = ({ children }) => {
   const authenticate = async (email, senha) => {
     const response = await LoginRequest(email, senha);
 
-    const payload = { token: response.IDUser, email, nome: response.nome };
+    const payload = { token: response.ID, email, nome: response.nome, nick: response.nick };
 
     setToken(payload);
   };
