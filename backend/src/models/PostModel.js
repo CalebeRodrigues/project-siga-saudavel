@@ -190,9 +190,9 @@ class Post {
         return PostModel;
     }
 
-    static estruturaObj({titulo, ingredientes, imagem, conteudo, IDUser, createdAt, updatedAt}, categorias) {
+    static estruturaObj({ID, titulo, ingredientes, imagem, conteudo, IDUser, createdAt, updatedAt}, categorias) {
         const obj = {
-            titulo, ingredientes, imagem,
+            ID, titulo, ingredientes, imagem,
             conteudo, IDUser, createdAt, updatedAt,
             categorias
         };
