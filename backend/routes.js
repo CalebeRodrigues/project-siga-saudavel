@@ -11,10 +11,11 @@ route.get('/', (req, res) => {
 });
 
 // User
+route.post('/user/login', UserController.login);
+
 route.get('/user/all', UserController.findAll);
 route.get('/user/:id', UserController.findById);
 
-route.post('/user/login', UserController.login);
 route.post('/user/register', UserController.register);
 
 route.put('/user/update/:id', UserController.update);
