@@ -249,3 +249,9 @@ a:hover {
   transform: translateY(-50%);
   left: 0;
 }
+
+@media screen and (max-width: 769px) {
+  .login-img-perfil {
+    display: none;
+  }
+}

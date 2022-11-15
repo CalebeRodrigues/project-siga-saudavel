@@ -27,7 +27,7 @@ export const Navbar = () => {
             auth.token ?
               <>
                 <li><a style={{ cursor: 'pointer' }} onClick={handleClickLogout}>Sair</a></li>
-                <li><Link to="/" style={{backgroundColor:'#1db309', color:'#ffff'}}>Olá, {auth.nick}</Link></li>
+                <li><Link to="/meuperfil" style={{backgroundColor:'#1db309', color:'#ffff'}}>Olá, {auth.nick}</Link></li>
               </>
             :
               <li><Link to="/login" style={{backgroundColor:'#1db309', color:'#ffff'}}>Entrar</Link></li>

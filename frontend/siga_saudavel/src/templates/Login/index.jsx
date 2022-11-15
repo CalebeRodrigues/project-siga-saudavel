@@ -23,7 +23,7 @@ export const Login = ({ isLogin = true }) => {
             }
           </form>
         </div>
-        <img src={loginImg} width="300" height="300" className="margin-left-50" />
+        <img src={loginImg} width="300" height="300" className="login-img-perfil margin-left-50" />
       </div>
     </div>
   );
