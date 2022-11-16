@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useState } from "react";
 
 import { TablePublications } from "../../components/TablePublications";
-import { useEffect } from "react";
+import { FormPublication } from "../../components/FormPublication";
 
 const Title = styled.h2`
   padding-top: 10%;
@@ -68,9 +68,11 @@ export const MeuPerfil = () => {
 
         <br />
 
-      {
-        op === 1 && <TablePublications />
-      }
+      { op === 1 && <TablePublications /> }
+
+      { op === 2 && <h2>Vamos atualizar seus dados</h2> }
+
+      { op === 3 && <FormPublication /> }
 
       </div>
     </>

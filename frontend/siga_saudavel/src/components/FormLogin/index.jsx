@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/Auth/useAuth";
 
@@ -13,11 +13,9 @@ export const FormLogin = () => {
 
   const [msgErro, setMsgErro] = useState(false);
 
-  const auth = useAuth();
+  const passInput = useRef();
 
-  useEffect(() => {
-    if(msgErro) navigate('/');
-  }, [msgErro])
+  const auth = useAuth();
 
   const Login = async (email, senha) => {
     return await auth.authenticate(email, senha);
@@ -29,6 +27,10 @@ export const FormLogin = () => {
     const bool = await Login(email, senha);
 
     setSenha('');
+
+    setMsgErro(!bool);
+
+    passInput.current.focus();
 
     bool ? navigate('/') : '';
   }
@@ -53,7 +55,8 @@ export const FormLogin = () => {
 
       <div className="wrap-input margin-bottom-35">
         <input
-          className="input-form"
+          ref={passInput}
+          className={`input-form ${msgErro ? 'input-form-pass-err' : ''}`}
           type="password"
           name="password"
           value={senha}
@@ -68,8 +71,7 @@ export const FormLogin = () => {
         </button>
       </div>
 
-      <ul className="login-utils">
-
+      <ul className="login-utils" >
         <li>
           <span className="text1">
             Não tem conta? <Link to='/cadastro' className='text2'>Clique aqui</Link>

@@ -116,6 +116,12 @@ button:hover {
   padding: 0 5px;
 }
 
+.input-form-pass-err {
+  transition: 0.3s;
+  border: 1px solid rgba(255, 0, 0, 0.589);
+  border-radius: 3px;
+}
+
 .focus-input-form {
   position: absolute;
   display: block;
@@ -234,7 +240,7 @@ a:hover {
 
 .login-utils li {
   position: relative;
-  padding-left: 16px;
+  padding: 0 10px;
 }
 
 .login-utils li::before {
