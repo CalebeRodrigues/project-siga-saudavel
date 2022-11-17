@@ -1,9 +1,16 @@
 import { useState, useEffect } from 'react';
+import styled from 'styled-components';
 
 import { Card } from '../../components/Card';
 import { Api } from '../../services/api';
 
 import './style.css';
+
+
+const Container = styled.section`
+  display: flex;
+  flex-direction: column;
+`;
 
 export const Feed = () => {
   const [publications, setPublication] = useState(null);
@@ -22,15 +29,19 @@ export const Feed = () => {
 
   return (
     <div id="feed" className="container" style={{ minHeight: '30vh', marginBottom: '20px' }}>
-      <h2>Publicações</h2>
+      <br />
+      <br />
+      <h2>Confira abaixo as receitas mais recentes</h2>
+      <br />
         {
           publications ?
             (
-              <section className="people-cards">
+              // <section className="people-cards">
+              <Container>
                 {publications.map(pub => {
                   return (<Card key={pub.ID} obj={{ ...pub }} />)
                 })}
-              </section>
+              </Container>
             ) :
             <h3>Nenhuma publicação realizada até o momento</h3>
         }
