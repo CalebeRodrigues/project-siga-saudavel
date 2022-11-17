@@ -9,6 +9,7 @@ import { Navbar } from './components/Navbar';
 import { Home } from './templates/Home';
 import { Login } from './templates/Login';
 import { MeuPerfil } from './templates/MeuPerfil';
+import { Publicacao } from './templates/Publicacao';
 
 export const Router = () => {
   return (
@@ -21,6 +22,7 @@ export const Router = () => {
           <Route path='/login' element={<Login />} />
           <Route path='/cadastro' element={<Login isLogin={false} />} />
           <Route path='/meuperfil' element={<MeuPerfil />} />
+          <Route path='/pub/:id' element={<Publicacao />} />
         </Routes>
       </AuthProvider>
     </BrowserRouter>
